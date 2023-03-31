@@ -1,0 +1,1 @@
+%Este programa calcula o ∠ (ângulo) de um Δ retângulo
