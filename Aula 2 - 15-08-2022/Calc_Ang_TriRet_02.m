@@ -1,0 +1,39 @@
+%%Este programa calcula o angulo de um Δ retangulo
+clear; %apaga as variaveis que estao na memoria
+close all; %fecha as janelas abertas anteriormente
+clc %limpa a command window
+
+%dados de entrada
+B = 1:1000; %base
+H = 1:5:200;   %altura
+theta = zeros(length(H), length(B));
+thetadeg1 = zeros(length(H), length(B));
+
+%%funcao anomola exemplo - cria uma funcao. a, b e c so funcionam dentro da formula
+x1 = @(a , b, c) (-b + sqrt(b^2-4*a*c))/(2*a);
+x2 = @(a , b, c) (-b - sqrt(b^2-4*a*c))/(2*a);
+%@ eh usado para chamar a funcao
+
+%%funcao anomola aplicada
+angle = @(h,b) rad2deg(atan(h./b));
+
+%depois de muitas linhas de programacao, vc resolve
+%calcular a raiz 1 de uma funcao
+resp1 = x1(1,0,-4);
+
+for t = 1:length(H) %calculo de todos os valores
+    %theta(t,:) = atan(H(t)./B); %ang Δ em rad
+    thetadeg1(t,:) = angle(H(t),B);
+    plot(B, thetadeg1, 'LineWidth', 2)
+    hold all
+end
+
+%%graphic settings
+ylabel('\theta  ','FontSize', 18, 'Rotation', 0)
+xlabel('Base', 'FontSize', 18, 'Rotation', 0)
+title('∠ de Δs ▭s', 'FontSize', 30);
+hold on
+
+%%surface plot
+figure()
+surf(B, H, thetadeg1, 'LineStyle','none')
